@@ -39,3 +39,14 @@ print(unflatten_dict({'a': 1, 'b.i': 2, 'b.j': 3, 'c': 4}))
 
 # Write a function treemap() to map a function over nested list.
 # treemap(lambda x: x*x, [1, 2, [3, 4, [5]]]) [1, 4, [9, 16, [25]]]
+
+def treemap(math_fn, num_list):
+  for i in range(len(num_list)):
+    if isinstance(num_list[i], list):
+      num_list[i] = treemap(math_fn, num_list[i])
+    else: 
+      num_list[i] = math_fn(num_list[i])
+
+  return num_list
+    
+print(treemap(lambda x: x*x, [1, 4, [9, 16, [25]]]))
